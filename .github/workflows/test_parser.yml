@@ -1,0 +1,26 @@
+name: Testing parser as github action
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: docker build -t flask_image .
+
+    - name: Run Docker container
+      run: docker run -d -p 5000:5000 flask_image
+
+    - name: Install pytest and requests
+      run: |
+        sudo apt-get install python3-pip
+        pip3 install pytest requests
+
+    - name: Run unit test
+      run: |
+        pytest tests/
