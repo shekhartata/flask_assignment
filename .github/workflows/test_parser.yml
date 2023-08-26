@@ -22,4 +22,5 @@ jobs:
         pip3 install pytest requests
 
     - name: Run unit test
-      run: pytest tests/test_passing.py
+      run: |
+      pytest tests/
